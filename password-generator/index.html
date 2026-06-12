@@ -2,30 +2,47 @@
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
-    <title>密碼產生器</title>
+    <title>專業密碼產生器</title>
     <style>
-        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background: #f4f4f9; margin: 0; }
+        body { font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background: #f4f4f9; margin: 0; }
         .box { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; }
-        input { font-size: 1.5rem; width: 300px; padding: 10px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 1rem; text-align: center; }
-        button { padding: 10px 20px; font-size: 1rem; background: #007bff; color: white; border: none; border-radius: 6px; cursor: pointer; }
-        button:hover { background: #0056b3; }
+        input { font-size: 1.5rem; width: 320px; padding: 10px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 1rem; text-align: center; }
+        button { padding: 10px 20px; font-size: 1rem; background: #27ae60; color: white; border: none; border-radius: 6px; cursor: pointer; }
+        button:hover { background: #219150; }
     </style>
 </head>
 <body>
     <div class="box">
-        <h2>密碼產生器</h2>
-        <input type="text" id="result" readonly>
+        <h2>安全密碼產生器</h2>
+        <input type="text" id="result" readonly placeholder="產生 12 位安全密碼">
         <br>
         <button onclick="makePassword()">產生密碼</button>
     </div>
     <script>
         function makePassword() {
-            const chars = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789";
-            let password = "";
-            for (let i = 0; i < 16; i++) {
-                password += chars.charAt(Math.floor(Math.random() * chars.length));
+            const upper = "ABCDEFGHJKLMNPQRSTUVWXYZ";
+            const lower = "abcdefghijkmnpqrstuvwxyz";
+            const num = "23456789";
+            const spec = "!@#$%^&*";
+            
+            // 確保每種類型至少出現一個 (4 個字元)
+            let password = [
+                upper[Math.floor(Math.random() * upper.length)],
+                lower[Math.floor(Math.random() * lower.length)],
+                num[Math.floor(Math.random() * num.length)],
+                spec[Math.floor(Math.random() * spec.length)]
+            ];
+
+            // 補齊剩餘長度 (12 - 4 = 8 個字元)
+            const all = upper + lower + num + spec;
+            for (let i = 0; i < 8; i++) {
+                password.push(all[Math.floor(Math.random() * all.length)]);
             }
-            document.getElementById("result").value = password;
+
+            // 洗牌算法確保隨機性
+            password = password.sort(() => Math.random() - 0.5);
+            
+            document.getElementById("result").value = password.join('');
         }
     </script>
 </body>
