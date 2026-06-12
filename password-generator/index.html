@@ -4,19 +4,27 @@
     <meta charset="UTF-8">
     <title>安全密碼產生器</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background: #f4f4f9; margin: 0; }
-        .box { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; }
-        input { font-size: 1.5rem; width: 320px; padding: 10px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 1rem; text-align: center; }
-        button { padding: 10px 20px; font-size: 1rem; background: #27ae60; color: white; border: none; border-radius: 6px; cursor: pointer; }
-        button:hover { background: #219150; }
+        :root { --primary: #4f46e5; --bg: #f8fafc; }
+        body { font-family: 'Inter', system-ui, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background: var(--bg); margin: 0; }
+        .box { background: white; padding: 2.5rem; border-radius: 16px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1); width: 350px; text-align: center; }
+        h2 { color: #1e293b; margin-bottom: 1.5rem; font-size: 1.25rem; }
+        input { font-family: monospace; font-size: 1.5rem; width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 8px; margin-bottom: 1rem; text-align: center; box-sizing: border-box; background: #f1f5f9; color: #334155; }
+        .btn-group { display: flex; gap: 10px; }
+        button { flex: 1; padding: 12px; font-size: 0.95rem; font-weight: 600; border: none; border-radius: 8px; cursor: pointer; transition: 0.2s; }
+        .btn-generate { background: var(--primary); color: white; }
+        .btn-generate:hover { background: #4338ca; }
+        .btn-copy { background: #e2e8f0; color: #475569; }
+        .btn-copy:hover { background: #cbd5e1; }
     </style>
 </head>
 <body>
     <div class="box">
-        <h2>安全密碼產生器</h2>
-        <input type="text" id="result" readonly placeholder="首字大寫，共 12 位">
-        <br>
-        <button onclick="makePassword()">產生密碼</button>
+        <h2>🔑 安全密碼產生器</h2>
+        <input type="text" id="result" readonly placeholder="點擊產生">
+        <div class="btn-group">
+            <button class="btn-generate" onclick="makePassword()">產生</button>
+            <button class="btn-copy" onclick="copyPassword()">複製</button>
+        </div>
     </div>
     <script>
         function makePassword() {
@@ -24,18 +32,22 @@
             const lower = "abcdefghijkmnpqrstuvwxyz";
             const num = "23456789";
             
-            // 1. 固定第一個字元為大寫
             let password = [upper[Math.floor(Math.random() * upper.length)]];
-
-            // 2. 剩餘 11 位從「小寫+數字」中隨機選取
             const others = lower + num;
             for (let i = 0; i < 11; i++) {
                 password.push(others[Math.floor(Math.random() * others.length)]);
             }
-            
             document.getElementById("result").value = password.join('');
+        }
+
+        function copyPassword() {
+            const copyText = document.getElementById("result");
+            if (copyText.value) {
+                copyText.select();
+                document.execCommand("copy");
+                alert("已複製到剪貼簿！");
+            }
         }
     </script>
 </body>
 </html>
-          
