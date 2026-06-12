@@ -2,29 +2,30 @@
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
-    <title>專業密碼產生器</title>
+    <title>密碼產生器</title>
     <style>
-        body { font-family: sans-serif; text-align: center; padding: 50px; background: #f0f2f5; }
-        .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); display: inline-block; }
-        input { font-size: 1.5em; padding: 10px; width: 300px; text-align: center; border: 2px solid #ddd; border-radius: 5px; }
-        button { font-size: 1.2em; padding: 10px 20px; background: #27ae60; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background: #f4f4f9; margin: 0; }
+        .box { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; }
+        input { font-size: 1.5rem; width: 300px; padding: 10px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 1rem; text-align: center; }
+        button { padding: 10px 20px; font-size: 1rem; background: #007bff; color: white; border: none; border-radius: 6px; cursor: pointer; }
+        button:hover { background: #0056b3; }
     </style>
 </head>
 <body>
-    <div class="card">
-        <h1>🔐 強力密碼產生器</h1>
-        <input type="text" id="password" readonly placeholder="點擊產生">
-        <br><br>
-        <button onclick="generate()">產生密碼</button>
+    <div class="box">
+        <h2>密碼產生器</h2>
+        <input type="text" id="result" readonly>
+        <br>
+        <button onclick="makePassword()">產生密碼</button>
     </div>
     <script>
-        function generate() {
-            const charset = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789!@#$%^&*";
-            let pwd = "";
+        function makePassword() {
+            const chars = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789";
+            let password = "";
             for (let i = 0; i < 16; i++) {
-                pwd += charset.charAt(Math.floor(Math.random() * charset.length));
+                password += chars.charAt(Math.floor(Math.random() * chars.length));
             }
-            document.getElementById("password").value = pwd;
+            document.getElementById("result").value = password;
         }
     </script>
 </body>
