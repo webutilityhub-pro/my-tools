@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
-    <title>專業密碼產生器</title>
+    <title>安全密碼產生器</title>
     <style>
         body { font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background: #f4f4f9; margin: 0; }
         .box { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; }
@@ -14,7 +14,7 @@
 <body>
     <div class="box">
         <h2>安全密碼產生器</h2>
-        <input type="text" id="result" readonly placeholder="產生 12 位安全密碼">
+        <input type="text" id="result" readonly placeholder="產生 12 位字母數字密碼">
         <br>
         <button onclick="makePassword()">產生密碼</button>
     </div>
@@ -23,23 +23,21 @@
             const upper = "ABCDEFGHJKLMNPQRSTUVWXYZ";
             const lower = "abcdefghijkmnpqrstuvwxyz";
             const num = "23456789";
-            const spec = "!@#$%^&*";
             
-            // 確保每種類型至少出現一個 (4 個字元)
+            // 確保每種類型至少一個 (3 個字元)
             let password = [
                 upper[Math.floor(Math.random() * upper.length)],
                 lower[Math.floor(Math.random() * lower.length)],
-                num[Math.floor(Math.random() * num.length)],
-                spec[Math.floor(Math.random() * spec.length)]
+                num[Math.floor(Math.random() * num.length)]
             ];
 
-            // 補齊剩餘長度 (12 - 4 = 8 個字元)
-            const all = upper + lower + num + spec;
-            for (let i = 0; i < 8; i++) {
+            // 補齊剩餘長度 (12 - 3 = 9 個字元)
+            const all = upper + lower + num;
+            for (let i = 0; i < 9; i++) {
                 password.push(all[Math.floor(Math.random() * all.length)]);
             }
 
-            // 洗牌算法確保隨機性
+            // 洗牌算法
             password = password.sort(() => Math.random() - 0.5);
             
             document.getElementById("result").value = password.join('');
@@ -47,5 +45,6 @@
     </script>
 </body>
 </html>
+           
             
           
