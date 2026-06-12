@@ -1,12 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-Hant">
 <head>
+    <meta charset="UTF-8">
     <title>WebUtilityHub - 工具大全</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            max-width: 800px; 
+            margin: 50px auto; 
+            text-align: center; 
+            background-color: #f4f7f6;
+        }
+        h1 { color: #2c3e50; }
+        .tool-list { 
+            list-style: none; 
+            padding: 0; 
+        }
+        .tool-card { 
+            background: white; 
+            margin: 15px auto; 
+            padding: 20px; 
+            width: 80%; 
+            border-radius: 10px; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+            transition: transform 0.2s;
+        }
+        .tool-card:hover { transform: scale(1.05); }
+        a { text-decoration: none; color: #3498db; font-weight: bold; font-size: 1.2em; }
+    </style>
 </head>
 <body>
-    <h1>歡迎來到 WebUtilityHub</h1>
-    <ul>
-        <li><a href="password-generator/">密碼產生器</a></li>
-    </ul>
+    <h1>🚀 WebUtilityHub 工具大全</h1>
+    <p>精選實用小工具，讓你效率加倍：</p>
+    <div class="tool-list">
+        <div class="tool-card">
+            <a href="password-generator/">🔐 密碼產生器</a>
+        </div>
+    </div>
 </body>
 </html>
