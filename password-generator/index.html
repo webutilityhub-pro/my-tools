@@ -1,18 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-Hant">
 <head>
-    <title>Random Password Generator</title>
+    <meta charset="UTF-8">
+    <title>專業密碼產生器</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 50px; background: #f0f2f5; }
+        .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); display: inline-block; }
+        input { font-size: 1.5em; padding: 10px; width: 300px; text-align: center; border: 2px solid #ddd; border-radius: 5px; }
+        button { font-size: 1.2em; padding: 10px 20px; background: #27ae60; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    </style>
 </head>
 <body>
-    <h1>Password Generator</h1>
-    <input type="text" id="password" readonly>
-    <button onclick="generate()">Generate</button>
+    <div class="card">
+        <h1>🔐 強力密碼產生器</h1>
+        <input type="text" id="password" readonly placeholder="點擊產生">
+        <br><br>
+        <button onclick="generate()">產生密碼</button>
+    </div>
     <script>
         function generate() {
-            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
+            const charset = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789!@#$%^&*";
             let pwd = "";
-            for (let i = 0; i < 12; i++) {
-                pwd += chars.charAt(Math.floor(Math.random() * chars.length));
+            for (let i = 0; i < 16; i++) {
+                pwd += charset.charAt(Math.floor(Math.random() * charset.length));
             }
             document.getElementById("password").value = pwd;
         }
