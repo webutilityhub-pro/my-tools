@@ -101,15 +101,22 @@
             const upper = "ABCDEFGHJKLMNPQRSTUVWXYZ";
             const lower = "abcdefghijkmnpqrstuvwxyz";
             const num = "23456789";
+            const spec = "!@#$%^&*";
             
-            // 1. Force first character to be Uppercase
-            let password = [upper[Math.floor(Math.random() * upper.length)]];
+            // 1. 固定首字大寫 + 固定一個特殊符號
+            let password = [
+                upper[Math.floor(Math.random() * upper.length)],
+                spec[Math.floor(Math.random() * spec.length)]
+            ];
             
-            // 2. Fill remaining 11 characters with lowercase and numbers
+            // 2. 剩餘 10 位從「小寫+數字」中選取
             const others = lower + num;
-            for (let i = 0; i < 11; i++) {
+            for (let i = 0; i < 10; i++) {
                 password.push(others[Math.floor(Math.random() * others.length)]);
             }
+
+            // 3. 洗牌，讓首字大寫跟特殊符號亂數分布
+            password = password.sort(() => Math.random() - 0.5);
 
             document.getElementById("result").value = password.join('');
         }
