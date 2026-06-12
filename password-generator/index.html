@@ -14,7 +14,7 @@
 <body>
     <div class="box">
         <h2>安全密碼產生器</h2>
-        <input type="text" id="result" readonly placeholder="產生 12 位字母數字密碼">
+        <input type="text" id="result" readonly placeholder="首字大寫，共 12 位">
         <br>
         <button onclick="makePassword()">產生密碼</button>
     </div>
@@ -24,27 +24,18 @@
             const lower = "abcdefghijkmnpqrstuvwxyz";
             const num = "23456789";
             
-            // 確保每種類型至少一個 (3 個字元)
-            let password = [
-                upper[Math.floor(Math.random() * upper.length)],
-                lower[Math.floor(Math.random() * lower.length)],
-                num[Math.floor(Math.random() * num.length)]
-            ];
+            // 1. 固定第一個字元為大寫
+            let password = [upper[Math.floor(Math.random() * upper.length)]];
 
-            // 補齊剩餘長度 (12 - 3 = 9 個字元)
-            const all = upper + lower + num;
-            for (let i = 0; i < 9; i++) {
-                password.push(all[Math.floor(Math.random() * all.length)]);
+            // 2. 剩餘 11 位從「小寫+數字」中隨機選取
+            const others = lower + num;
+            for (let i = 0; i < 11; i++) {
+                password.push(others[Math.floor(Math.random() * others.length)]);
             }
-
-            // 洗牌算法
-            password = password.sort(() => Math.random() - 0.5);
             
             document.getElementById("result").value = password.join('');
         }
     </script>
 </body>
 </html>
-           
-            
           
