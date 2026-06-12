@@ -12,7 +12,6 @@
             --bg-start: #e0f2fe;
             --bg-end: #fee2e2;
             --text-dark: #1e293b;
-            --text-light: #64748b;
         }
 
         body {
@@ -53,16 +52,6 @@
             color: #334155;
         }
 
-        .input-group label {
-            position: absolute;
-            top: -10px;
-            left: 20px;
-            background: #f1f5f9;
-            padding: 0 8px;
-            color: var(--text-light);
-            font-size: 0.8rem;
-        }
-
         .btn-group { display: flex; gap: 16px; }
 
         button {
@@ -97,8 +86,7 @@
     <div class="box">
         <h2>🔒 Password Generator</h2>
         <div class="input-group">
-            <label>12-Character Password</label>
-            <input type="text" id="result" readonly placeholder="Click Generate">
+            <input type="text" id="result" readonly placeholder="12-char Password">
         </div>
         <div class="btn-group">
             <button class="btn-generate" onclick="makePassword()">Generate</button>
@@ -113,21 +101,16 @@
             const upper = "ABCDEFGHJKLMNPQRSTUVWXYZ";
             const lower = "abcdefghijkmnpqrstuvwxyz";
             const num = "23456789";
-            const spec = "!@#$%^&*";
             
-            let password = [
-                upper[Math.floor(Math.random() * upper.length)],
-                lower[Math.floor(Math.random() * lower.length)],
-                num[Math.floor(Math.random() * num.length)],
-                spec[Math.floor(Math.random() * spec.length)]
-            ];
-
-            const all = upper + lower + num + spec;
-            for (let i = 0; i < 8; i++) {
-                password.push(all[Math.floor(Math.random() * all.length)]);
+            // 1. Force first character to be Uppercase
+            let password = [upper[Math.floor(Math.random() * upper.length)]];
+            
+            // 2. Fill remaining 11 characters with lowercase and numbers
+            const others = lower + num;
+            for (let i = 0; i < 11; i++) {
+                password.push(others[Math.floor(Math.random() * others.length)]);
             }
 
-            password = password.sort(() => Math.random() - 0.5);
             document.getElementById("result").value = password.join('');
         }
 
