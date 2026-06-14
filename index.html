@@ -1,42 +1,291 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebUtilityHub | Professional Developer Tools</title>
-    <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; color: #333; max-width: 1000px; margin: 0 auto; padding: 40px 20px; background-color: #f9f9f9; }
-        header { text-align: center; margin-bottom: 50px; }
-        h1 { font-size: 2.5rem; color: #111; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-        .card { background: white; padding: 25px; border-radius: 12px; border: 1px solid #eaeaea; transition: transform 0.2s, box-shadow 0.2s; text-decoration: none; color: inherit; }
-        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.08); border-color: #007bff; }
-        .card h3 { margin-top: 0; color: #007bff; }
-        footer { margin-top: 60px; text-align: center; font-size: 0.9rem; color: #888; }
-    </style>
+
+<meta charset="UTF-8">
+
+<title>Secure Password Generator</title>
+
+<style>
+
+:root {
+
+--primary: #6366f1;
+
+--primary-hover: #4f46e5;
+
+--secondary: #e2e8f0;
+
+--secondary-hover: #cbd5e1;
+
+--bg-start: #e0f2fe;
+
+--bg-end: #fee2e2;
+
+--text-dark: #1e293b;
+
+--text-light: #64748b;
+
+}
+
+
+
+body {
+
+font-family: 'Segoe UI', system-ui, sans-serif;
+
+display: flex;
+
+justify-content: center;
+
+align-items: center;
+
+height: 100vh;
+
+margin: 0;
+
+background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%);
+
+}
+
+
+
+.box {
+
+background: rgba(255, 255, 255, 0.9);
+
+padding: 3rem;
+
+border-radius: 24px;
+
+box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+
+width: 400px;
+
+text-align: center;
+
+backdrop-filter: blur(10px);
+
+border: 1px solid rgba(255, 255, 255, 0.5);
+
+}
+
+
+
+h2 { color: var(--text-dark); margin-bottom: 2rem; font-size: 1.5rem; }
+
+
+
+.input-group { position: relative; margin-bottom: 2rem; }
+
+
+
+input {
+
+font-family: 'Cascadia Code', monospace;
+
+font-size: 1.5rem;
+
+width: 100%;
+
+padding: 16px;
+
+border: 2px solid transparent;
+
+border-radius: 12px;
+
+text-align: center;
+
+box-sizing: border-box;
+
+background: #f1f5f9;
+
+color: #334155;
+
+}
+
+
+
+.input-group label {
+
+position: absolute;
+
+top: -10px;
+
+left: 20px;
+
+background: #f1f5f9;
+
+padding: 0 8px;
+
+color: var(--text-light);
+
+font-size: 0.8rem;
+
+}
+
+
+
+.btn-group { display: flex; gap: 16px; }
+
+
+
+button {
+
+flex: 1;
+
+padding: 14px;
+
+font-weight: 600;
+
+border: none;
+
+border-radius: 12px;
+
+cursor: pointer;
+
+transition: all 0.3s ease;
+
+}
+
+
+
+.btn-generate { background: var(--primary); color: white; }
+
+.btn-generate:hover { background: var(--primary-hover); }
+
+.btn-copy { background: var(--secondary); color: var(--text-dark); }
+
+.btn-copy:hover { background: var(--secondary-hover); }
+
+
+
+#status {
+
+position: fixed;
+
+bottom: 20px;
+
+background: rgba(16, 185, 129, 0.9);
+
+color: white;
+
+padding: 12px 24px;
+
+border-radius: 99px;
+
+opacity: 0;
+
+transition: all 0.3s ease;
+
+}
+
+#status.show { opacity: 1; }
+
+</style>
+
 </head>
+
 <body>
 
-    <header>
-        <h1>WebUtilityHub</h1>
-        <p>A collection of secure, high-performance tools for developers and creators.</p>
-    </header>
+<div class="box">
 
-    <main class="grid">
-        <a href="password-generator.html" class="card">
-            <h3>Password Generator</h3>
-            <p>Create secure, high-entropy passwords with custom settings. Local computation only.</p>
-        </a>
+<h2>🔒 Password Generator</h2>
 
-        <div class="card" style="opacity: 0.5;">
-            <h3>More Tools Coming Soon</h3>
-            <p>We are constantly adding new utilities to help you be more productive.</p>
-        </div>
-    </main>
+<div class="input-group">
 
-    <footer>
-        &copy; 2026 WebUtilityHub. All rights reserved.
-    </footer>
+<label>12-Character Password</label>
+
+<input type="text" id="result" readonly placeholder="Click Generate">
+
+</div>
+
+<div class="btn-group">
+
+<button class="btn-generate" onclick="makePassword()">Generate</button>
+
+<button class="btn-copy" onclick="copyPassword()">Copy</button>
+
+</div>
+
+</div>
+
+
+
+<div id="status">Copied to clipboard!</div>
+
+
+
+<script>
+
+function makePassword() {
+
+const upper = "ABCDEFGHJKLMNPQRSTUVWXYZ";
+
+const lower = "abcdefghijkmnpqrstuvwxyz";
+
+const num = "23456789";
+
+const spec = "!@#$%^&*";
+
+
+let password = [
+
+upper[Math.floor(Math.random() * upper.length)],
+
+lower[Math.floor(Math.random() * lower.length)],
+
+num[Math.floor(Math.random() * num.length)],
+
+spec[Math.floor(Math.random() * spec.length)]
+
+];
+
+
+
+const all = upper + lower + num + spec;
+
+for (let i = 0; i < 8; i++) {
+
+password.push(all[Math.floor(Math.random() * all.length)]);
+
+}
+
+
+
+password = password.sort(() => Math.random() - 0.5);
+
+document.getElementById("result").value = password.join('');
+
+}
+
+
+
+function copyPassword() {
+
+const copyText = document.getElementById("result");
+
+if (copyText.value) {
+
+navigator.clipboard.writeText(copyText.value).then(() => {
+
+const status = document.getElementById("status");
+
+status.classList.add("show");
+
+setTimeout(() => status.classList.remove("show"), 2000);
+
+});
+
+}
+
+}
+
+</script>
 
 </body>
-</html>
+
+</html> 
+
