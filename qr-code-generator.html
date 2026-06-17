@@ -39,15 +39,16 @@
     <div id="result"></div>
 
     <script>
-                                function generate() {
+                                            function generate() {
                 const val = document.getElementById('input').value;
                 const res = document.getElementById('result');
 
                 if (!val) return;
 
-                const url = `https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=${encodeURIComponent(val)}`;
+                const baseUrl = "https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=";
+                const url = baseUrl + encodeURIComponent(val);
                 
-                res.innerHTML = `<img src="${url}"><br><a href="${url}" download="qrcode.png">Download</a>`;
+                res.innerHTML = '<img src="' + url + '"><br><a href="' + url + '" download="qrcode.png">Download</a>';
             }
 
             }
