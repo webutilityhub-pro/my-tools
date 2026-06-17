@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Counter Tool | WebUtilityHub</title>
+    <meta name="description" content="A fast and easy-to-use online word counter. Get instant word, character, and line counts for your text.">
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; max-width: 800px; margin: 20px auto; padding: 0 20px; }
+        textarea { width: 100%; height: 200px; padding: 10px; margin: 10px 0; box-sizing: border-box; }
+        .stats { display: flex; gap: 20px; font-weight: bold; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+
+    <h1>Word Counter</h1>
+    <p>Type or paste your text below to get instant statistics:</p>
+
+    <textarea id="textInput" placeholder="Paste your text here..."></textarea>
+
+    <div class="stats">
+        <div>Words: <span id="wordCount">0</span></div>
+        <div>Characters: <span id="charCount">0</span></div>
+        <div>Lines: <span id="lineCount">0</span></div>
+    </div>
+
+    <script>
+        const textarea = document.getElementById('textInput');
+        textarea.addEventListener('input', () => {
+            const text = textarea.value;
+            
+            // Words
+            const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+            document.getElementById('wordCount').innerText = words;
+
+            // Characters
+            document.getElementById('charCount').innerText = text.length;
+
+            // Lines
+            const lines = text ? text.split('\n').length : 0;
+            document.getElementById('lineCount').innerText = lines;
+        });
+    </script>
+
+    <hr>
+    <h2>About this Word Counter</h2>
+    <p>This tool helps you quickly calculate the number of words, characters, and lines in your text. Perfect for writers, students, and professionals who need to meet specific length requirements. Simply paste your text, and the stats will update automatically.</p>
+
+</body>
+</html>
