@@ -9,7 +9,7 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-73NZXM9XKP"></script>
     <script src="analytics.js"></script>
 
-      <style>
+        <style>
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; padding: 20px; }
         header { text-align: center; margin-bottom: 50px; }
         h1 { font-size: 2.5rem; color: #111; }
@@ -26,11 +26,20 @@
             border-radius: 12px; 
             border: 1px solid #eaeaea;
             text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .card:hover { 
+            border-color: #007bff; 
+            box-shadow: 0 10px 20px rgba(0,123,255,0.15);
+            transform: translateY(-5px);
         }
         
         .card a { text-decoration: none; color: #333; }
-        .card:hover { border-color: #007bff; }
+        .card h3 { margin-top: 0; color: #007bff; }
     </style>
+
 
 </head>
 <body>
