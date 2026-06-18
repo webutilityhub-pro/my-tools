@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mental Math Trainer</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; background: #f4f4f9; padding: 40px; }
+        .container { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); max-width: 500px; margin: auto; }
+        .hidden { display: none; }
+        input { font-size: 20px; width: 100px; padding: 10px; margin: 10px 0; }
+        button { padding: 10px 25px; font-size: 18px; cursor: pointer; background: #007bff; color: white; border: none; border-radius: 5px; }
+        button:hover { background: #0056b3; }
+        h1 { color: #333; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div id="home-screen">
+        <h1>Mental Math Trainer</h1>
+        <p>Challenge your brain with random math problems.</p>
+        <button onclick="startGame()">START PRACTICE</button>
+    </div>
+
+    <div id="game-screen" class="hidden">
+        <h2 id="question"></h2>
+        <input type="number" id="answer" placeholder="Answer">
+        <br>
+        <button onclick="checkAnswer()">SUBMIT</button>
+        <p>Score: <span id="score">0</span></p>
+    </div>
+</div>
+
+<script>
+    let currentAnswer = 0, score = 0;
+
+    function startGame() {
+        document.getElementById('home-screen').style.display = 'none';
+        document.getElementById('game-screen').classList.remove('hidden');
+        nextQuestion();
+    }
+
+    function nextQuestion() {
+        let a = Math.floor(Math.random() * 50) + 1;
+        let b = Math.floor(Math.random() * 50) + 1;
+        let ops = ['+', '-', '*'];
+        let op = ops[Math.floor(Math.random() * ops.length)];
+        currentAnswer = eval(`${a}${op}${b}`);
+        document.getElementById('question').innerText = `${a} ${op} ${b} = ?`;
+        document.getElementById('answer').value = '';
+        document.getElementById('answer').focus();
+    }
+
+    function checkAnswer() {
+        let val = document.getElementById('answer').value;
+        if (parseInt(val) === currentAnswer) {
+            score++;
+            document.getElementById('score').innerText = score;
+        }
+        nextQuestion();
+    }
+</script>
+
+</body>
+</html>
