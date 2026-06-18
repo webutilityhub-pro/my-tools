@@ -2,64 +2,78 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Mental Math Trainer</title>
+    <title>Hardcore Math Trainer</title>
     <style>
-        body { font-family: sans-serif; text-align: center; background: #f4f4f9; padding: 40px; }
-        .container { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); max-width: 500px; margin: auto; }
-        .hidden { display: none; }
-        input { font-size: 20px; width: 100px; padding: 10px; margin: 10px 0; }
-        button { padding: 10px 25px; font-size: 18px; cursor: pointer; background: #007bff; color: white; border: none; border-radius: 5px; }
-        button:hover { background: #0056b3; }
-        h1 { color: #333; }
+        body { font-family: 'Courier New', Courier, monospace; text-align: center; padding: 50px; background: #1a1a1a; color: #00ff41; }
+        #question { font-size: 80px; margin: 30px 0; }
+        #timer { font-size: 30px; color: #ff3e3e; font-weight: bold; }
+        input { font-size: 40px; width: 250px; padding: 15px; background: #000; color: #00ff41; border: 3px solid #00ff41; text-align: center; }
+        p { font-size: 24px; margin-top: 20px; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div id="home-screen">
-        <h1>Mental Math Trainer</h1>
-        <p>Challenge your brain with random math problems.</p>
-        <button onclick="startGame()">START PRACTICE</button>
-    </div>
-
-    <div id="game-screen" class="hidden">
-        <h2 id="question"></h2>
-        <input type="number" id="answer" placeholder="Answer">
-        <br>
-        <button onclick="checkAnswer()">SUBMIT</button>
-        <p>Score: <span id="score">0</span></p>
-    </div>
-</div>
+<div id="timer">Time: 20</div>
+<h2 id="question"></h2>
+<input type="number" id="answer" autofocus>
+<p>Score: <span id="score">0</span></p>
 
 <script>
-    let currentAnswer = 0, score = 0;
-
-    function startGame() {
-        document.getElementById('home-screen').style.display = 'none';
-        document.getElementById('game-screen').classList.remove('hidden');
-        nextQuestion();
-    }
+    let currentAnswer, score = 0, timeLeft = 20, timerInterval;
 
     function nextQuestion() {
-        let a = Math.floor(Math.random() * 50) + 1;
-        let b = Math.floor(Math.random() * 50) + 1;
+        clearInterval(timerInterval);
+        timeLeft = 20;
+        document.getElementById('timer').innerText = "Time: " + timeLeft;
+        
+        // 隨機產生較難的三項運算
+        let a = Math.floor(Math.random() * 50) + 10;
+        let b = Math.floor(Math.random() * 20) + 2;
+        let c = Math.floor(Math.random() * 10) + 2;
+        
+        // 隨機運算子
         let ops = ['+', '-', '*'];
-        let op = ops[Math.floor(Math.random() * ops.length)];
-        currentAnswer = eval(`${a}${op}${b}`);
-        document.getElementById('question').innerText = `${a} ${op} ${b} = ?`;
+        let op1 = ops[Math.floor(Math.random() * 3)];
+        let op2 = ops[Math.floor(Math.random() * 3)];
+        
+        // 確保不會出現過於極端的運算，組合成: A op1 (B op2 C)
+        let expression = `${a} ${op1} (${b} ${op2} ${c})`;
+        currentAnswer = eval(expression);
+        
+        document.getElementById('question').innerText = expression + " = ?";
         document.getElementById('answer').value = '';
         document.getElementById('answer').focus();
+
+        timerInterval = setInterval(() => {
+            timeLeft--;
+            document.getElementById('timer').innerText = "Time: " + timeLeft;
+            if (timeLeft <= 0) {
+                alert("Time's up! Final Score: " + score);
+                score = 0;
+                document.getElementById('score').innerText = score;
+                nextQuestion();
+            }
+        }, 1000);
     }
 
     function checkAnswer() {
         let val = document.getElementById('answer').value;
-        if (parseInt(val) === currentAnswer) {
+        if (val !== "" && parseInt(val) === currentAnswer) {
             score++;
+            document.getElementById('score').innerText = score;
+        } else {
+            alert("Wrong! Answer was: " + currentAnswer);
+            score = 0;
             document.getElementById('score').innerText = score;
         }
         nextQuestion();
     }
-</script>
 
+    document.getElementById('answer').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') checkAnswer();
+    });
+
+    nextQuestion();
+</script>
 </body>
 </html>
