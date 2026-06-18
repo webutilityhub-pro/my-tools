@@ -3,25 +3,25 @@
 <head>
     <style>
         body { margin: 0; background: #000; color: #fff; font-family: sans-serif; text-align: center; overflow: hidden; }
-        #controls { margin-top: 50px; }
-        #timer { font-size: 5rem; margin-top: 20px; }
-        canvas { position: absolute; top: 0; left: 0; pointer-events: none; }
-        input { padding: 10px; font-size: 1rem; }
+        #controls { margin-top: 50px; z-index: 10; position: relative; }
+        #timer { font-size: 5rem; margin-top: 20px; z-index: 10; position: relative; }
+        canvas { position: absolute; top: 0; left: 0; }
+        input { padding: 10px; font-size: 1rem; width: 100px; }
         button { padding: 10px 20px; font-size: 1rem; cursor: pointer; }
     </style>
 </head>
 <body>
 
 <div id="controls">
-    <input type="number" id="timeInput" placeholder="Enter seconds" min="1">
+    <input type="number" id="minuteInput" placeholder="Minutes" min="0.1" step="0.1">
     <button onclick="startTimer()">Start Countdown</button>
 </div>
-<div id="timer">0</div>
+<div id="timer">00:00</div>
 <canvas id="canvas"></canvas>
 
 <script>
     const timerElement = document.getElementById('timer');
-    const timeInput = document.getElementById('timeInput');
+    const minuteInput = document.getElementById('minuteInput');
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
     
@@ -33,20 +33,28 @@
 
     function startTimer() {
         clearInterval(countdownInterval);
-        let timeLeft = parseInt(timeInput.value);
-        if (isNaN(timeLeft) || timeLeft <= 0) return;
+        // Convert minutes to seconds
+        let totalSeconds = parseFloat(minuteInput.value) * 60;
+        if (isNaN(totalSeconds) || totalSeconds <= 0) return;
         
-        timerElement.innerText = timeLeft;
+        updateDisplay(totalSeconds);
 
         countdownInterval = setInterval(() => {
-            timeLeft--;
-            timerElement.innerText = timeLeft;
-            if (timeLeft <= 0) {
+            totalSeconds--;
+            updateDisplay(totalSeconds);
+            
+            if (totalSeconds <= 0) {
                 clearInterval(countdownInterval);
-                timerElement.innerText = "BOOM!";
+                timerElement.innerText = "TIME IS UP!";
                 launchFireworks();
             }
         }, 1000);
+    }
+
+    function updateDisplay(seconds) {
+        let m = Math.floor(seconds / 60);
+        let s = Math.floor(seconds % 60);
+        timerElement.innerText = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
     }
 
     class Particle {
@@ -73,7 +81,7 @@
     }
 
     function launchFireworks() {
-        for (let i = 0; i < 200; i++) {
+        for (let i = 0; i < 300; i++) {
             fireworks.push(new Particle(canvas.width / 2, canvas.height / 2));
         }
         animate();
@@ -82,4 +90,13 @@
     function animate() {
         ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        fireworks.forEach((p, index
+        fireworks.forEach((p, index) => {
+            p.update();
+            p.draw();
+            if (p.alpha <= 0) fireworks.splice(index, 1);
+        });
+        if (fireworks.length > 0) requestAnimationFrame(animate);
+    }
+</script>
+</body>
+</html>
