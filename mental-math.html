@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hardcore Math Trainer</title>
+    <style>
+        body { font-family: 'Courier New', Courier, monospace; text-align: center; padding: 50px; background: #1a1a1a; color: #00ff41; }
+        #question { font-size: 80px; margin: 30px 0; }
+        #timer { font-size: 30px; color: #ff3e3e; font-weight: bold; }
+        input { font-size: 40px; width: 250px; padding: 15px; background: #000; color: #00ff41; border: 3px solid #00ff41; text-align: center; }
+        p { font-size: 24px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+<div id="timer">Time: 20</div>
+<h2 id="question"></h2>
+<input type="number" id="answer" autofocus>
+<p>Score: <span id="score">0</span></p>
+
+<script>
+    let currentAnswer, score = 0, timeLeft = 20, timerInterval;
+
+    function nextQuestion() {
+        clearInterval(timerInterval);
+        timeLeft = 20;
+        document.getElementById('timer').innerText = "Time: " + timeLeft;
+        
+        // 隨機產生較難的三項運算
+        let a = Math.floor(Math.random() * 50) + 10;
+        let b = Math.floor(Math.random() * 20) + 2;
+        let c = Math.floor(Math.random() * 10) + 2;
+        
+        // 隨機運算子
+        let ops = ['+', '-', '*'];
+        let op1 = ops[Math.floor(Math.random() * 3)];
+        let op2 = ops[Math.floor(Math.random() * 3)];
+        
+        // 確保不會出現過於極端的運算，組合成: A op1 (B op2 C)
+        let expression = `${a} ${op1} (${b} ${op2} ${c})`;
+        currentAnswer = eval(expression);
+        
+        document.getElementById('question').innerText = expression + " = ?";
+        document.getElementById('answer').value = '';
+        document.getElementById('answer').focus();
+
+        timerInterval = setInterval(() => {
+            timeLeft--;
+            document.getElementById('timer').innerText = "Time: " + timeLeft;
+            if (timeLeft <= 0) {
+                alert("Time's up! Final Score: " + score);
+                score = 0;
+                document.getElementById('score').innerText = score;
+                nextQuestion();
+            }
+        }, 1000);
+    }
+
+    function checkAnswer() {
+        let val = document.getElementById('answer').value;
+        if (val !== "" && parseInt(val) === currentAnswer) {
+            score++;
+            document.getElementById('score').innerText = score;
+        } else {
+            alert("Wrong! Answer was: " + currentAnswer);
+            score = 0;
+            document.getElementById('score').innerText = score;
+        }
+        nextQuestion();
+    }
+
+    document.getElementById('answer').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') checkAnswer();
+    });
+
+    nextQuestion();
+</script>
+</body>
+</html>
