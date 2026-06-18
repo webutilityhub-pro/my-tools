@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToolHub</title>
+    <style>
+        body { font-family: sans-serif; background: #f4f4f9; padding: 40px; text-align: center; }
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+            gap: 15px; 
+            max-width: 1000px; 
+            margin: auto; 
+        }
+        .card { 
+            background: white; 
+            padding: 20px; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+            text-decoration: none; 
+            color: #333; 
+            font-weight: bold;
+            transition: 0.2s;
+        }
+        .card:hover { background: #007bff; color: white; }
+    </style>
+</head>
+<body>
+
+    <h1>ToolHub</h1>
+    <div class="grid">
+        <a href="agecalculator.html" class="card">Age Calculator</a>
+        <a href="bmi.html" class="card">BMI Calculator</a>
+        <a href="passwordgenerator.html" class="card">Password Generator</a>
+        <a href="discountcalculator.html" class="card">Discount Calculator</a>
+        <a href="randompicker.html" class="card">Random Picker</a>
+        <a href="unitconverter.html" class="card">Unit Converter</a>
+        </div>
+
+</body>
+</html>
