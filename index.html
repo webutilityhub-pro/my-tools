@@ -1,84 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>    <meta charset="UTF-8">
-    <meta name="google-site-verification" content="nCud9kOZ3DOYd38fmdJ-rVz7FRMyk8hW17zRQvkVIpE" />
-    <title>WebUtilityHub | Professional Developer Tools</title>
-
-    
-
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-73NZXM9XKP"></script>
-    <script src="analytics.js"></script>
-
-        <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; padding: 20px; }
-        header { text-align: center; margin-bottom: 50px; }
-        h1 { font-size: 2.5rem; color: #111; }
-        
-        .grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
-            gap: 20px; 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebUtilityHub - Professional Toolkit</title>
+    <style>
+        :root {
+            --primary: #0056b3;
+            --bg: #f8f9fa;
+            --text: #333;
+            --card-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
-        
-        .card { 
-            background: white; 
-            padding: 25px; 
-            border-radius: 12px; 
-            border: 1px solid #eaeaea;
-            text-align: center;
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: var(--bg);
+            margin: 0;
+            padding: 60px 20px;
+            color: var(--text);
+        }
+        .container { max-width: 900px; margin: 0 auto; text-align: center; }
+        h1 { color: var(--primary); font-size: 2.5em; margin-bottom: 10px; }
+        .subtitle { color: #666; margin-bottom: 50px; font-weight: 300; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
             transition: all 0.3s ease;
-            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            color: var(--text);
+            border: 1px solid #eaeaea;
         }
-        
-        .card:hover { 
-            border-color: #007bff; 
-            box-shadow: 0 10px 20px rgba(0,123,255,0.15);
-            transform: translateY(-5px);
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 20px rgba(0,86,179,0.15);
+            border-color: var(--primary);
         }
-        
-        .card a { text-decoration: none; color: #333; }
-        .card h3 { margin-top: 0; color: #007bff; }
+        .card h3 { color: var(--primary); margin-top: 0; }
+        .footer { margin-top: 80px; color: #999; font-size: 0.8em; }
     </style>
-
-
 </head>
 <body>
 
-    <header>
-        <h1>WebUtilityHub</h1>
-        <p>A collection of secure, high-performance tools for developers and creators.</p>
-    </header>
+<div class="container">
+    <h1>WebUtilityHub</h1>
+    <p class="subtitle">Secure, high-performance tools running locally in your browser.</p>
 
-        <main class="grid">
-        
-        <div class="card">
-            <a href="password-generator.html">
-                <h3>Password Generator</h3>
-            </a>
-            <p>Create secure, high-entropy passwords.</p>
+    <div class="grid">
+        <a href="password-generator.html" class="card">
+            <h3>Password Generator</h3>
+            <p>Generate secure, high-entropy passwords offline.</p>
+        </a>
+        <a href="word-counter.html" class="card">
+            <h3>Word Counter</h3>
+            <p>Instant word, character, and line count analysis.</p>
+        </a>
+        <div class="card" style="opacity: 0.5; cursor: default;">
+            <h3>More Tools Soon</h3>
+            <p>Expanding the utility collection.</p>
         </div>
+    </div>
 
-        <div class="card">
-            <a href="word-counter.html">
-                <h3>Word Counter</h3>
-            </a>
-            <p>Get instant word, character, and line counts.</p>
-        </div>
-
-        
-
-        <div class="card" style="opacity: 0.5;">
-            <h3>More Tools Coming Soon</h3>
-            <p>We are constantly adding new utilities.</p>
-        </div>
-
-    </main>
-
-
-
-    <footer>
+    <div class="footer">
         &copy; 2026 WebUtilityHub. All rights reserved.
-    </footer>
+    </div>
+</div>
 
 </body>
 </html>
