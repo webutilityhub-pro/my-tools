@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Calculate your exact age in years, months, and days.">
+    <title>Age Calculator</title>
+    <style>
+        body { font-family: sans-serif; display: flex; justify-content: center; padding: 50px; background: #f4f4f9; }
+        .card { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 100%; max-width: 350px; text-align: center; }
+        input, button { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+        button { background: #007bff; color: white; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Age Calculator</h2>
+    <input type="date" id="dob">
+    <button onclick="calculate()">Calculate</button>
+    <h3 id="result"></h3>
+</div>
+
+<script>
+    function calculate() {
+        const birthDate = new Date(document.getElementById('dob').value);
+        const today = new Date();
+        
+        if (!birthDate.getTime()) return;
+
+        let y = today.getFullYear() - birthDate.getFullYear();
+        let m = today.getMonth() - birthDate.getMonth();
+        let d = today.getDate() - birthDate.getDate();
+
+        if (d < 0) {
+            m--;
+            const lastMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+            d += lastMonth.getDate();
+        }
+        if (m < 0) {
+            y--;
+            m += 12;
+        }
+
+        document.getElementById('result').innerText = `${y} Years, ${m} Months, ${d} Days`;
+    }
+</script>
+
+</body>
+</html>
