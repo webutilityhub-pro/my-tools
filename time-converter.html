@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Time Zone Converter</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 50px; background: #f0f2f5; }
+        .container { max-width: 450px; margin: auto; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        label { display: block; margin-top: 15px; font-weight: bold; text-align: left; }
+        select, input, button { width: 100%; padding: 15px; margin: 10px 0; font-size: 16px; border-radius: 10px; border: 1px solid #ddd; box-sizing: border-box; }
+        button { background: #6366f1; color: white; border: none; cursor: pointer; font-weight: bold; }
+        #display { font-size: 24px; margin-top: 25px; font-weight: 600; color: #374151; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Time Zone Converter</h2>
+    
+    <label>Source Time</label>
+    <input type="time" id="sourceTime" value="12:00">
+    
+    <label>From</label>
+    <select id="fromZone">
+        <option value="8">Taiwan (GMT+8)</option>
+        <option value="9">Japan (GMT+9)</option>
+        <option value="2">Germany (GMT+2)</option>
+        <option value="1">UK (GMT+1)</option>
+        <option value="-4">USA New York (GMT-4)</option>
+        <option value="-7">USA Los Angeles (GMT-7)</option>
+        <option value="10">Australia Sydney (GMT+10)</option>
+        <option value="7">Thailand (GMT+7)</option>
+        <option value="7">Vietnam (GMT+7)</option>
+        <option value="9">South Korea (GMT+9)</option>
+        <option value="1">France (GMT+1)</option>
+        <option value="1">Italy (GMT+1)</option>
+        <option value="1">Spain (GMT+1)</option>
+        <option value="1">Netherlands (GMT+1)</option>
+        <option value="-2">Brazil (GMT-2)</option>
+        <option value="8">Singapore (GMT+8)</option>
+        <option value="8">Malaysia (GMT+8)</option>
+        <option value="7">Indonesia (GMT+7)</option>
+        <option value="5.5">India (GMT+5.5)</option>
+        <option value="-4">Canada Toronto (GMT-4)</option>
+    </select>
+
+    <label>To</label>
+    <select id="toZone">
+        <option value="8">Taiwan (GMT+8)</option>
+        <option value="9">Japan (GMT+9)</option>
+        <option value="2">Germany (GMT+2)</option>
+        <option value="1">UK (GMT+1)</option>
+        <option value="-4">USA New York (GMT-4)</option>
+        <option value="-7">USA Los Angeles (GMT-7)</option>
+        <option value="10">Australia Sydney (GMT+10)</option>
+        <option value="7">Thailand (GMT+7)</option>
+        <option value="7">Vietnam (GMT+7)</option>
+        <option value="9">South Korea (GMT+9)</option>
+        <option value="1">France (GMT+1)</option>
+        <option value="1">Italy (GMT+1)</option>
+        <option value="1">Spain (GMT+1)</option>
+        <option value="1">Netherlands (GMT+1)</option>
+        <option value="-2">Brazil (GMT-2)</option>
+        <option value="8">Singapore (GMT+8)</option>
+        <option value="8">Malaysia (GMT+8)</option>
+        <option value="7">Indonesia (GMT+7)</option>
+        <option value="5.5">India (GMT+5.5)</option>
+        <option value="-4">Canada Toronto (GMT-4)</option>
+    </select>
+    
+    <button onclick="convertTime()">Convert</button>
+    <div id="display">Result: --:--</div>
+</div>
+
+<script>
+    function convertTime() {
+        const timeInput = document.getElementById('sourceTime').value;
+        const fromOffset = parseFloat(document.getElementById('fromZone').value);
+        const toOffset = parseFloat(document.getElementById('toZone').value);
+        
+        let [hours, minutes] = timeInput.split(':').map(Number);
+        
+        // Convert to UTC then to target zone
+        let totalMinutes = (hours * 60 + minutes) - (fromOffset * 60) + (toOffset * 60);
+        
+        let targetHours = Math.floor(totalMinutes / 60) % 24;
+        if (targetHours < 0) targetHours += 24;
+        let targetMinutes = totalMinutes % 60;
+        
+        document.getElementById('display').innerText = 
+            `Target Time: ${String(targetHours).padStart(2, '0')}:${String(targetMinutes).padStart(2, '0')}`;
+    }
+</script>
+
+</body>
+</html>
