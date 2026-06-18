@@ -2,110 +2,82 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">。 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WebUtilityHub - Professional Toolkit</title>
     <style>
         :root {
-            --primary: #0056b3;
-            --bg: #f8f9fa;
-            --text: #333;
-            --card-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            --primary: #1a73e8;
+            --bg: #ffffff;
+            --text: #202124;
+            --text-secondary: #5f6368;
+            --card-border: #dadce0;
         }
-        body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background-color: var(--bg);
-            margin: 0;
-            padding: 60px 20px;
-            color: var(--text);
-        }
-        .container { max-width: 900px; margin: 0 auto; text-align: center; }
-        h1 { color: var(--primary); font-size: 2.5em; margin-bottom: 10px; }
-        .subtitle { color: #666; margin-bottom: 50px; font-weight: 300; }
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-        }
-        .card {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: var(--card-shadow);
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: block;
-            color: var(--text);
-            border: 1px solid #eaeaea;
-        }
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 20px rgba(0,86,179,0.15);
-            border-color: var(--primary);
-        }
-        .card h3 { color: var(--primary); margin-top: 0; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 40px 20px; display: flex; flex-direction: column; align-items: center; }
+        header { text-align: center; margin-bottom: 50px; }
+        h1 { color: var(--primary); font-size: 40px; margin: 0; }
+        .subtitle { color: var(--text-secondary); margin-top: 10px; }
+        .search-area { width: 100%; max-width: 600px; margin-bottom: 40px; }
+        .search-area input { width: 100%; padding: 15px 25px; border-radius: 30px; border: 1px solid var(--card-border); font-size: 16px; box-sizing: border-box; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; width: 100%; max-width: 1000px; }
+        .card { background: white; border: 1px solid var(--card-border); border-radius: 8px; padding: 25px; text-decoration: none; color: var(--text); transition: 0.2s; display: block; }
+        .card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-color: transparent; }
+        .card h3 { color: var(--primary); margin: 0 0 10px 0; font-size: 20px; }
+        .card p { color: var(--text-secondary); font-size: 14px; margin: 0; }
         .footer { margin-top: 80px; color: #999; font-size: 0.8em; }
     </style>
 </head>
 <body>
 
-<div class="container">
+<header>
     <h1>WebUtilityHub</h1>
-    <p class="subtitle">Secure, high-performance tools running locally in your browser.</p>
+    <p class="subtitle">Secure, high-performance tools running locally.</p>
+</header>
 
-    <div class="grid">
-        <a href="password-generator.html" class="card">
-            <h3>Password Generator</h3>
-            <p>Generate secure, high-entropy passwords offline.</p>
-        </a>
-            <a href="word-counter.html" class="card">
+<div class="search-area">
+    <input type="text" placeholder="Search utilities...">
+</div>
+
+<div class="grid">
+    <a href="password-generator.html" class="card">
+        <h3>Password Generator</h3>
+        <p>Generate secure, high-entropy passwords offline.</p>
+    </a>
+    <a href="word-counter.html" class="card">
         <h3>Word Counter</h3>
         <p>Instant word, character, and line count analysis.</p>
     </a>
     <a href="agecalculator.html" class="card">
         <h3>Age Calculator</h3>
         <p>Calculate your exact age in years, months, and days.</p>
-    </a><a href="bmi-calculator.html" class="card">
-    <h3>BMI Calculator</h3>
-    <p>Calculate your Body Mass Index (BMI) quickly.</p>
-</a>    <a href="countdown-timer.html" class="card">
+    </a>
+    <a href="bmi-calculator.html" class="card">
+        <h3>BMI Calculator</h3>
+        <p>Calculate your Body Mass Index (BMI) quickly.</p>
+    </a>
+    <a href="countdown-timer.html" class="card">
         <h3>Countdown Timer</h3>
         <p>Track the time remaining for your upcoming events.</p>
-    </a><a href="mental-math.html" class="card">
-    <h3>Mental Math Trainer</h3>
-    <p>Practice your mental math skills with randomly generated questions.</p>
-</a><a href="qr-generator.html" class="card">
-    <h3>QR Code Generator</h3>
-    <p>Generate QR codes instantly in your browser without API calls.</p>
-</a><a href="pet-age.html" class="card">
-    <h3>Pet Age Converter</h3>
-    <p>Calculate your pet's age in human years.</p>
-</a><a href="time-converter.html" class="card">
-    <h3>Time Zone Converter</h3>
-    <p>Convert Taiwan time to other global time zones.</p>
-</a>
-
-
-</a>
-
-</a>
-
-
-
-
-
-
-
-
-
-    <div class="card" style="opacity: 0.5; cursor: default;">
-        <h3>More Tools Soon</h3>
-        <p>Expanding the utility collection.</p>
-    </div>
+    </a>
+    <a href="mental-math.html" class="card">
+        <h3>Mental Math Trainer</h3>
+        <p>Practice your mental math skills.</p>
+    </a>
+    <a href="qr-generator.html" class="card">
+        <h3>QR Code Generator</h3>
+        <p>Generate QR codes instantly in your browser.</p>
+    </a>
+    <a href="pet-age.html" class="card">
+        <h3>Pet Age Converter</h3>
+        <p>Calculate your pet's age in human years.</p>
+    </a>
+    <a href="time-converter.html" class="card">
+        <h3>Time Zone Converter</h3>
+        <p>Convert Taiwan time to other global time zones.</p>
+    </a>
 </div>
 
-    <div class="footer">
-        &copy; 2026 WebUtilityHub. All rights reserved.
-    </div>
+<div class="footer">
+    &copy; 2026 WebUtilityHub. All rights reserved.
 </div>
 
 </body>
