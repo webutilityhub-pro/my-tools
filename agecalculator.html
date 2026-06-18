@@ -3,40 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ToolHub</title>
+    <title>Age Calculator</title>
     <style>
-        body { font-family: sans-serif; background: #f4f4f9; padding: 40px; text-align: center; }
-        .grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
-            gap: 15px; 
-            max-width: 1000px; 
-            margin: auto; 
-        }
-        .card { 
-            background: white; 
-            padding: 20px; 
-            border-radius: 8px; 
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
-            text-decoration: none; 
-            color: #333; 
-            font-weight: bold;
-            transition: 0.2s;
-        }
-        .card:hover { background: #007bff; color: white; }
+        body { font-family: sans-serif; display: flex; justify-content: center; padding: 50px; background: #f4f4f9; }
+        .card { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 100%; max-width: 400px; text-align: center; }
+        input, button { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+        button { background: #007bff; color: white; border: none; cursor: pointer; }
+        button:hover { background: #0056b3; }
     </style>
 </head>
 <body>
 
-    <h1>ToolHub</h1>
-    <div class="grid">
-        <a href="agecalculator.html" class="card">Age Calculator</a>
-        <a href="bmi.html" class="card">BMI Calculator</a>
-        <a href="passwordgenerator.html" class="card">Password Generator</a>
-        <a href="discountcalculator.html" class="card">Discount Calculator</a>
-        <a href="randompicker.html" class="card">Random Picker</a>
-        <a href="unitconverter.html" class="card">Unit Converter</a>
-        </div>
+<div class="card">
+    <h2>Age Calculator</h2>
+    <input type="date" id="dob">
+    <button onclick="calculate()">Calculate Age</button>
+    <h3 id="result"></h3>
+</div>
+
+<script>
+    function calculate() {
+        const dob = new Date(document.getElementById('dob').value);
+        const today = new Date();
+        
+        if (!dob.getTime()) return;
+
+        let years = today.getFullYear() - dob.getFullYear();
+        let months = today.getMonth() - dob.getMonth();
+        let days = today.getDate() - dob.getDate();
+
+        if (days < 0) {
+            months--;
+            days += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+        }
+        if (months < 0) {
+            years--;
+            months += 12;
+        }
+
+        document.getElementById('result').innerText = 
+            `${years} Years, ${months} Months, ${days} Days`;
+    }
+</script>
 
 </body>
 </html>
