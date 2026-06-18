@@ -80,5 +80,21 @@
     &copy; 2026 WebUtilityHub. All rights reserved.
 </div>
 
+<script>
+    document.querySelector('.search-area input').addEventListener('keyup', function(e) {
+        const term = e.target.value.toLowerCase();
+        const cards = document.querySelectorAll('.card');
+        cards.forEach(card => {
+            const title = card.querySelector('h3').innerText.toLowerCase();
+            const desc = card.querySelector('p').innerText.toLowerCase();
+            if (title.includes(term) || desc.includes(term)) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    });
+</script>
+
 </body>
 </html>
