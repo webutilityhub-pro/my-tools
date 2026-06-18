@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <style>
+        body { font-family: sans-serif; display: flex; justify-content: center; padding: 50px; background: #f4f4f9; }
+        .card { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 100%; max-width: 400px; text-align: center; }
+        input, button { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+        button { background: #28a745; color: white; border: none; cursor: pointer; }
+        button:hover { background: #218838; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>BMI Calculator</h2>
+    <input type="number" id="height" placeholder="Height (cm)">
+    <input type="number" id="weight" placeholder="Weight (kg)">
+    <button onclick="calculateBMI()">Calculate BMI</button>
+    <h3 id="result"></h3>
+</div>
+
+<script>
+    function calculateBMI() {
+        const height = document.getElementById('height').value / 100;
+        const weight = document.getElementById('weight').value;
+        if (height > 0 && weight > 0) {
+            const bmi = (weight / (height * height)).toFixed(2);
+            document.getElementById('result').innerText = `Your BMI is ${bmi}`;
+        } else {
+            document.getElementById('result').innerText = "Please enter valid values";
+        }
+    }
+</script>
+
+</body>
+</html>
