@@ -46,25 +46,30 @@
 <button onclick="rollDice()">Roll Dice</button>
 
 <script>
+    // Keep track of total rotations to ensure it always moves forward
+    let totalX = 0;
+    let totalY = 0;
+
     function rollDice() {
         const dice = document.getElementById('dice');
         const randomValue = Math.floor(Math.random() * 6) + 1;
         
-        let x = 0, y = 0;
+        let targetX = 0, targetY = 0;
         
         switch(randomValue) {
-            case 1: x = 0; y = 0; break;
-            case 2: x = -90; y = 0; break;
-            case 3: x = 0; y = -90; break;
-            case 4: x = 0; y = 90; break;
-            case 5: x = 90; y = 0; break;
-            case 6: x = 180; y = 0; break;
+            case 1: targetX = 0; targetY = 0; break;
+            case 2: targetX = -90; targetY = 0; break;
+            case 3: targetX = 0; targetY = -90; break;
+            case 4: targetX = 0; targetY = 90; break;
+            case 5: targetX = 90; targetY = 0; break;
+            case 6: targetX = 180; targetY = 0; break;
         }
         
-        const finalX = x + 3600;
-        const finalY = y + 3600;
+        // Add 10 full rotations (3600 degrees) to the current total
+        totalX += 3600 + (targetX - (totalX % 360));
+        totalY += 3600 + (targetY - (totalY % 360));
         
-        dice.style.transform = `rotateX(${finalX}deg) rotateY(${finalY}deg)`;
+        dice.style.transform = `rotateX(${totalX}deg) rotateY(${totalY}deg)`;
     }
 </script>
 
