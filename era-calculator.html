@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebUtilityHub - Pro Tools</title>
+    <style>
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+            background-color: #f4f7f6; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            padding: 50px 20px; 
+            margin: 0; 
+        }
+        h1 { color: #2c3e50; margin-bottom: 40px; }
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 900px;
+        }
+        .card {
+            background: white;
+            padding: 25px;
+            text-decoration: none;
+            color: #333;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+        .card h3 { margin-top: 0; color: #1a73e8; }
+        .card p { font-size: 0.9rem; color: #666; margin-bottom: 0; }
+    </style>
+</head>
+<body>
+
+    <h1>WebUtilityHub</h1>
+
+    <div class="nav-grid">
+        <a href="batting-average.html" class="card">
+            <h3>Batting Average Calculator</h3>
+            <p>Calculate AVG stats instantly for players.</p>
+        </a>
+        <a href="era-calculator.html" class="card">
+            <h3>ERA Calculator</h3>
+            <p>Professional pitcher ERA with inning conversion.</p>
+        </a>
+        
+        <a href="dice-roller.html" class="card">
+            <h3>3D Dice Roller</h3>
+            <p>A 3D interactive dice for random numbers.</p>
+        </a>
+    </div>
+
+</body>
+</html>
