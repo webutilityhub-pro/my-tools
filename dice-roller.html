@@ -35,19 +35,19 @@
 <div class="scene">
     <div class="dice" id="dice">
         <div class="face front">1</div>
-        <div class="face back">6</div>
+        <div class="face top">2</div>
         <div class="face right">3</div>
         <div class="face left">4</div>
-        <div class="face top">2</div>
         <div class="face bottom">5</div>
+        <div class="face back">6</div>
     </div>
 </div>
 
 <button onclick="rollDice()">Roll Dice</button>
 
 <script>
-    let totalX = 0;
-    let totalY = 0;
+    let currentX = 0;
+    let currentY = 0;
 
     function rollDice() {
         const dice = document.getElementById('dice');
@@ -61,14 +61,13 @@
             case 3: targetX = 0; targetY = -90; break;
             case 4: targetX = 0; targetY = 90; break;
             case 5: targetX = 90; targetY = 0; break;
-            case 6: targetX = 180; targetY = 0; break;
+            case 6: targetX = 0; targetY = 180; break;
         }
         
-        // Reset base rotation to clean multiples of 360 to prevent flip bugs, then add 10 turns
-        totalX = Math.round(totalX / 360) * 360 + 3600 + targetX;
-        totalY = Math.round(totalY / 360) * 360 + 3600 + targetY;
+        currentX += 3600 + (targetX - (currentX % 360));
+        currentY += 3600 + (targetY - (currentY % 360));
         
-        dice.style.transform = `rotateX(${totalX}deg) rotateY(${totalY}deg)`;
+        dice.style.transform = `rotateX(${currentX}deg) rotateY(${currentY}deg)`;
     }
 </script>
 
