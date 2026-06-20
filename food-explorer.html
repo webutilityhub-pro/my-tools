@@ -1,3 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Global Cuisine Explorer</title>
+    <style>
+        .container { max-width: 400px; margin: 50px auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px; text-align: center; font-family: sans-serif; }
+        select, button { width: 100%; padding: 12px; margin: 10px 0; border-radius: 5px; cursor: pointer; }
+        ul { list-style: none; padding: 0; text-align: left; }
+        li { background: #f4f4f4; margin: 5px 0; padding: 10px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Cuisine Explorer</h2>
+    <select id="countrySelect">
+        <option value="">-- Select a Country --</option>
+    </select>
+    <button onclick="searchCuisine()">Search</button>
+    <ul id="foodList"></ul>
+</div>
+
+<script>
 const data = {
     "Taiwan": ["Beef Noodle Soup", "Braised Pork Rice", "Bubble Tea", "Oyster Omelet", "Stinky Tofu"],
     "Japan": ["Sushi", "Ramen", "Tempura", "Sashimi", "Yakitori"],
@@ -23,10 +47,36 @@ const data = {
     "Netherlands": ["Stroopwafel", "Haring", "Bitterballen", "Poffertjes", "Erwtensoep"],
     "Portugal": ["Pastel de Nata", "Bacalhau", "Francesinha", "Caldo Verde", "Arroz de Marisco"],
     "Morocco": ["Couscous", "Tagine", "Pastilla", "Harira", "Zaalouk"],
-    "Peru": ["Ceviche", "Lomo Saltado", "Aji de Gelina", "Anticuchos", "Causa"],
+    "Peru": ["Ceviche", "Lomo Saltado", "Aji de Gallina", "Anticuchos", "Causa"],
     "Lebanon": ["Hummus", "Tabbouleh", "Falafel", "Fattoush", "Kibbeh"],
     "Israel": ["Falafel", "Shakshuka", "Hummus", "Sabich", "Malabi"],
     "Denmark": ["Smørrebrød", "Frikadeller", "Stegt Flæsk", "Æbleskiver", "Wienerbrød"],
     "Ireland": ["Irish Stew", "Soda Bread", "Colcannon", "Boxty", "Black Pudding"],
     "Austria": ["Wiener Schnitzel", "Sachertorte", "Tafelspitz", "Kaiserschmarrn", "Knödel"]
 };
+
+const select = document.getElementById('countrySelect');
+Object.keys(data).sort().forEach(country => {
+    let opt = document.createElement('option');
+    opt.value = country;
+    opt.textContent = country;
+    select.appendChild(opt);
+});
+
+function searchCuisine() {
+    const country = select.value;
+    const list = document.getElementById('foodList');
+    list.innerHTML = "";
+    if (country) {
+        data[country].forEach(food => {
+            let li = document.createElement('li');
+            li.textContent = food;
+            list.appendChild(li);
+        });
+    } else {
+        alert("Please select a country first!");
+    }
+}
+</script>
+</body>
+</html>
