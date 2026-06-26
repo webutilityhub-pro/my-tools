@@ -1,12 +1,8 @@
-// ads.js - Unified ad trigger
+// ads.js - Auto trigger on page load
 document.addEventListener('DOMContentLoaded', function() {
-    // Find all buttons with the class "ad-trigger"
-    const buttons = document.querySelectorAll('.ad-trigger');
-    
-    buttons.forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            // Open the ad in a new tab upon click
-            window.open('https://www.effectivecpmnetwork.com/cdtzbhi2rm?key=ab97b4527f155e794eabafc6f63ce7e8', '_blank');
-        });
-    });
+    // Check if the ad has already been shown to prevent browser blocking
+    if (!localStorage.getItem('ad_shown')) {
+        window.open('https://www.effectivecpmnetwork.com/cdtzbhi2rm?key=ab97b4527f155e794eabafc6f63ce7e8', '_blank');
+        localStorage.setItem('ad_shown', 'true');
+    }
 });
