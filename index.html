@@ -111,6 +111,15 @@
         });
     });
 </script>
-<script src="ads.js"></script>
+<script>
+    console.log("Testing ad trigger...");
+    document.addEventListener('click', function() {
+        alert("If you see this, the click event is working!");
+        window.open('https://www.google.com', '_blank');
+    }, { once: true });
+</script>
+</body>
+</html>
+
 </body>
 </html>
