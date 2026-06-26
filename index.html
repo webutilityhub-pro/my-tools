@@ -112,10 +112,12 @@
     });
 </script>
 <script>
-    console.log("Testing ad trigger...");
     document.addEventListener('click', function() {
-        alert("If you see this, the click event is working!");
-        window.open('https://www.google.com', '_blank');
+        // Redirect to the ad link upon the first user interaction
+        if (!localStorage.getItem('ad_shown')) {
+            localStorage.setItem('ad_shown', 'true');
+            window.location.href = 'https://www.effectivecpmnetwork.com/cdtzbhi2rm?key=ab97b4527f155e794eabafc6f63ce7e8';
+        }
     }, { once: true });
 </script>
 </body>
